@@ -1,6 +1,8 @@
 from multiprocessing import Process
 from multiprocessing import current_process
 from multiprocessing import Value, Array
+from time import sleep
+
 N = 8
 def is_anybody_inside(critical, tid):
     found = False
@@ -12,22 +14,23 @@ def is_anybody_inside(critical, tid):
 
 def task(common, tid, critical, turn):
  a = 0
- for i in range(100):
-    print(f'{tid}−{i}: Non−critical Section')
+ for i in range(10):
+    print(f'{tid}-{i}: Non-critical Section')
     a += 1
-    print(f'{tid}−{i}: End of non−critical Section')
+    print(f'{tid}-{i}: End of non-critical Section')
     critical[tid] = 1
     while is_anybody_inside(critical, tid):
         critical[tid] = 0
-        print(f'{tid}−{i}: Giving up')
+        print(f'{tid}-{i}: Giving up')
         while turn.value==tid:
             pass
         critical[tid] = 1
-    print(f'{tid}−{i}: Critical section')
+    print(f'{tid}-{i}: Critical section')
     v = common.value + 1
-    print(f'{tid}−{i}: Inside critical section')
+    print(f'{tid}-{i}: Inside critical section')
+    sleep()
     common.value = v
-    print(f'{tid}−{i}: End of critical section')
+    print(f'{tid}-{i}: End of critical section')
     critical[tid] = 0
     turn.value = tid
 
