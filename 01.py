@@ -1,20 +1,24 @@
 from multiprocessing import Process
 from multiprocessing import current_process
 from multiprocessing import Value, Array
+from time import sleep
+from random import random
+
 N = 8
 def task(common, tid, turn):
     a = 0
-    for i in range(100):
-        print(f'{tid}−{i}: Non−critical Section')
+    for i in range(10):
+        print(f'{tid}-{i}: Non-critical Section')
         a += 1
-        print(f'{tid}−{i}: End of non−critical Section')
+        print(f'{tid}-{i}: End of non-critical Section')
         while turn.value!=tid:
             pass
-        print(f'{tid}−{i}: Critical section')
+        print(f'{tid}-{i}: Critical section')
         v = common.value + 1
-        print(f'{tid}−{i}: Inside critical section')
+        print(f'{tid}-{i}: Inside critical section')
+        sleep(random())
         common.value = v
-        print(f'{tid}−{i}: End of critical section')
+        print(f'{tid}-{i}: End of critical section')
         turn.value = (tid + 1) % N
 def main():
     lp = []
