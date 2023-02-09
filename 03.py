@@ -12,7 +12,7 @@ def is_anybody_inside(critical, tid):
 def task(common, tid, critical):
     a = 0
     for i in range(100):
-        print('{tid}−{i}: Non−critical Section')
+        print(f'{tid}−{i}: Non−critical Section')
         a += 1
         print(f'{tid}−{i}: End of non−critical Section')
         critical[tid] = 1
