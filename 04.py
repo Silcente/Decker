@@ -2,6 +2,7 @@ from multiprocessing import Process
 from multiprocessing import current_process
 from multiprocessing import Value, Array
 from time import sleep
+from random import random
 
 N = 8
 def is_anybody_inside(critical, tid):
@@ -28,7 +29,7 @@ def task(common, tid, critical, turn):
     print(f'{tid}-{i}: Critical section')
     v = common.value + 1
     print(f'{tid}-{i}: Inside critical section')
-    sleep()
+    sleep(random())
     common.value = v
     print(f'{tid}-{i}: End of critical section')
     critical[tid] = 0

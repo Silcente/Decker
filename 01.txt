@@ -1,0 +1,5 @@
+Valor inicial del contador 0
+0-0: Non-critical Section
+0-0: End of non-critical Section
+0-0: Critical section
+0-0: Inside critical section

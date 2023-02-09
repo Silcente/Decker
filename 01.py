@@ -2,6 +2,7 @@ from multiprocessing import Process
 from multiprocessing import current_process
 from multiprocessing import Value, Array
 from time import sleep
+from random import random
 
 N = 8
 def task(common, tid, turn):
@@ -15,7 +16,7 @@ def task(common, tid, turn):
         print(f'{tid}-{i}: Critical section')
         v = common.value + 1
         print(f'{tid}-{i}: Inside critical section')
-        sleep()
+        sleep(random())
         common.value = v
         print(f'{tid}-{i}: End of critical section')
         turn.value = (tid + 1) % N
